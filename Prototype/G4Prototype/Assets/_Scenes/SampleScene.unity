@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -190,8 +190,8 @@ GameObject:
   - component: {fileID: 289779781}
   - component: {fileID: 289779780}
   - component: {fileID: 289779779}
-  - component: {fileID: 289779783}
   - component: {fileID: 289779784}
+  - component: {fileID: 289779783}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669907}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: Untagged
@@ -390,6 +391,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBody: {fileID: 289779782}
   mouseSensitivity: 2
+--- !u!114 &534669907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07bb7a966c4cdaa4fb3cbfeffd76a48c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 1792947288008450, guid: 6ea2c44b12dae834cbc8f8e40fa7246f, type: 2}
+  offset: 1
 --- !u!1 &722756628
 GameObject:
   m_ObjectHideFlags: 0
