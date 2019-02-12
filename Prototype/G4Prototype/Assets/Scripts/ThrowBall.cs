@@ -7,9 +7,12 @@ public class ThrowBall : MonoBehaviour {
     public GameObject ballPrefab;
     [SerializeField]
     private float offset;
+    [SerializeField]
+    private float force;
 
 
-	void Start () {
+
+    void Start () {
 		
 	}
 	
@@ -20,8 +23,9 @@ public class ThrowBall : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 spawnVector = new Vector3(transform.parent.position.x, transform.parent.position.y, transform.parent.forward.z + offset);
-            Instantiate(ballPrefab, spawnVector, Quaternion.identity);
+            GameObject b = Instantiate(ballPrefab, transform.position + transform.forward * offset, transform.rotation);
+            Rigidbody bRb = b.GetComponent<Rigidbody>();
+            bRb.AddForce(b.transform.position + b.transform.forward * force, ForceMode.Impulse);
         }
         
     }
