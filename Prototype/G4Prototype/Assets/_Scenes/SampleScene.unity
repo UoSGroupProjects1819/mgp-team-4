@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -242,7 +242,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 289779778}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -317,6 +317,7 @@ MonoBehaviour:
   speed: 6
   jumpSpeed: 8
   gravity: 200
+  Camera: {fileID: 534669902}
 --- !u!143 &289779784
 CharacterController:
   m_ObjectHideFlags: 0
@@ -530,6 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballObject: {fileID: 386185752}
   force: 10
+  rot: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &722756628
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1007,10 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792947288008450, guid: 6ea2c44b12dae834cbc8f8e40fa7246f, type: 2}
+      propertyPath: m_TagString
+      value: Ball
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ea2c44b12dae834cbc8f8e40fa7246f, type: 2}

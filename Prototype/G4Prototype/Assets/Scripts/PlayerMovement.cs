@@ -9,9 +9,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
+    public GameObject Camera;
+    private ThrowBall throwBallScript;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        throwBallScript = Camera.GetComponent<ThrowBall>();
     }
 
     void Update()
@@ -28,5 +32,14 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the controller
         controller.Move(moveDirection * Time.deltaTime);
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball"))
+        {
+            throwBallScript.resetBall(collision.gameObject);
+        }
     }
 }

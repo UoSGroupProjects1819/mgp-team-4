@@ -11,7 +11,7 @@ public class ThrowBall : MonoBehaviour {
     private Vector3 initialPos;
     private Quaternion initialRot;
 
-
+    public Quaternion rot;
 
     void Start () {
         initialPos = ballObject.transform.localPosition;
@@ -35,16 +35,16 @@ public class ThrowBall : MonoBehaviour {
             ballRB.useGravity = true;
             ballRB.AddForce(ballObject.transform.position + ballObject.transform.forward * force, ForceMode.Impulse);
         }
+
         if (Input.GetMouseButtonDown(1))
         {
             resetBall(ballObject);
         }
 
         Debug.DrawRay(ballObject.transform.position, ballObject.transform.forward * force, Color.red);
-        
     }
 
-    void resetBall(GameObject ball)
+    public void resetBall(GameObject ball)
     {
         ball.transform.parent = this.gameObject.transform;
         ball.transform.localPosition = initialPos;
