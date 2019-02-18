@@ -20,6 +20,7 @@ public class PlayerLook : MonoBehaviour
     void Update()
     {
         RotateCamera();
+        Debug.DrawRay(gameObject.transform.position, gameObject.transform.forward * 5.0f, Color.green);
     }
 
     void RotateCamera()

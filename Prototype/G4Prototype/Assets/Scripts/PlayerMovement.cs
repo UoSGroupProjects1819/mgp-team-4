@@ -32,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the controller
         controller.Move(moveDirection * Time.deltaTime);
-
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -33,7 +33,7 @@ public class ThrowBall : MonoBehaviour {
             ballObject.transform.parent = null;
             Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
             ballRB.useGravity = true;
-            ballRB.AddForce(ballObject.transform.position + ballObject.transform.forward * force, ForceMode.Impulse);
+            ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
         }
 
         if (Input.GetMouseButtonDown(1))
