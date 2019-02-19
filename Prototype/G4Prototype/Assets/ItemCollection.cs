@@ -8,6 +8,9 @@ public class ItemCollection : MonoBehaviour
     private bool inRangeOfItem;
     private GameObject itemInRange;
 
+    private bool inRangeOfPodium;
+    ItemDeposit depositPodScript;
+
     public List<string> inventory;
 
     void Start()
@@ -32,6 +35,27 @@ public class ItemCollection : MonoBehaviour
         {
             Debug.Log(inventory);
         }
+
+        if(inRangeOfPodium && Input.GetKeyDown(KeyCode.E))
+        {
+            bool hadItem = false;
+
+            foreach (var item in inventory)
+            {
+                if (item == depositPodScript.compareToStore)
+                {
+                    hadItem = true;
+                    inventory.Remove(item);
+                    Debug.Log("Placed item on podium");
+                    break;
+                }                
+            }
+            if(hadItem == false)
+            {
+                Debug.Log("You don't have the item");
+            }
+
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,6 +67,13 @@ public class ItemCollection : MonoBehaviour
             inRangeOfItem = true;
             itemInRange = other.gameObject;
         }
+
+        if (other.gameObject.CompareTag("Deposit"))
+        {
+            Debug.Log("Entered Podium Space");
+            depositPodScript = other.gameObject.GetComponent<ItemDeposit>();
+            inRangeOfPodium = true;
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -52,6 +83,13 @@ public class ItemCollection : MonoBehaviour
             Debug.Log("Left Item Space");
             inRangeOfItem = false;
             itemInRange = null;
+        }
+
+        if (other.gameObject.CompareTag("Deposit"))
+        {
+            Debug.Log("Left Podium Space");
+            depositPodScript = null;
+            inRangeOfPodium = false;
         }
     }
 }
