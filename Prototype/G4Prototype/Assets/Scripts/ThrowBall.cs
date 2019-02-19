@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThrowBall : MonoBehaviour {
 
     public GameObject ballObject;
+    private SphereCollider ballCollider;
     [SerializeField]
     private float force;
 
@@ -13,9 +14,12 @@ public class ThrowBall : MonoBehaviour {
 
     public Quaternion rot;
 
+    private bool hasBall;
+
     void Start () {
         initialPos = ballObject.transform.localPosition;
         initialRot = ballObject.transform.localRotation;
+        ballCollider = ballObject.GetComponent<SphereCollider>();
     }
 	
 	void OnMouseDown () {
@@ -23,12 +27,23 @@ public class ThrowBall : MonoBehaviour {
 
     void Update()
     {
+        if(gameObject.transform.childCount != 0)
+        {
+            hasBall = true;
+            ballCollider.enabled = false;
+        }
+        else
+        {
+            hasBall = false;
+            ballCollider.enabled = true;
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             print(initialPos);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && hasBall)
         {
             ballObject.transform.parent = null;
             Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
