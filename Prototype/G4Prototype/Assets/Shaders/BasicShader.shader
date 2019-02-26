@@ -3,7 +3,12 @@
 
 Shader "Custom/Echolocation" {
 	Properties{
-		_Color("Color", Color) = (1, 1, 1, 1)
+		_ColorBase("ColorBase", Color) = (1, 1, 1, 1)
+		_Color1("Color1", Color) = (1, 1, 1, 1)
+		_Color2("Color2", Color) = (1, 1, 1, 1)
+		_Color3("Color3", Color) = (1, 1, 1, 1)
+		_Color4("Color4", Color) = (1, 1, 1, 1)
+		_Color5("Color5", Color) = (1, 1, 1, 1)
 		_Center1("Center1", vector) = (0, 0, 0)
 		_Center2("Center2", vector) = (0, 0, 0)
 		_Center3("Center3", vector) = (0, 0, 0)
@@ -15,33 +20,13 @@ Shader "Custom/Echolocation" {
 		_Radius4("Radius4", float) = 0
 		_Radius5("Radius5", float) = 0
 
-		_WireThickness("Wire Thickness", RANGE(0, 800)) = 100
-		_WireSmoothness("Wire Smoothness", RANGE(0, 20)) = 3
-		_WireColor("Wire Color", Color) = (0.0, 1.0, 0.0, 1.0)
-		_BaseColor("Base Color", Color) = (0.0, 0.0, 0.0, 0.0)
-		_MaxTriSize("Max Tri Size", RANGE(0, 200)) = 25
+		//_WireThickness("Wire Thickness", RANGE(0, 800)) = 100
+		//_WireSmoothness("Wire Smoothness", RANGE(0, 20)) = 3
+		//_WireColor("Wire Color", Color) = (0.0, 1.0, 0.0, 1.0)
+		//_BaseColor("Base Color", Color) = (0.0, 0.0, 0.0, 0.0)
+		//_MaxTriSize("Max Tri Size", RANGE(0, 200)) = 25
 	}
 		SubShader{
-				Pass
-				{
-					Blend SrcAlpha OneMinusSrcAlpha
-					ZWrite Off
-					Cull Back
-
-				// Wireframe shader based on the the following
-				// http://developer.download.nvidia.com/SDK/10/direct3d/Source/SolidWireframe/Doc/SolidWireframe.pdf
-
-				CGPROGRAM
-				#pragma vertex vert
-				#pragma geometry geom
-				#pragma fragment frag
-
-				#include "UnityCG.cginc"
-				#include "Wireframe.cginc"
-
-				ENDCG
-			}
-
 			Pass {
 				Tags 
 				{ 
@@ -55,7 +40,12 @@ Shader "Custom/Echolocation" {
 				#pragma fragment frag
 				#include "UnityCG.cginc"
 
-				float4 _Color;
+				float4 _ColorBase;
+				float4 _Color1;
+				float4 _Color2;
+				float4 _Color3;
+				float4 _Color4;
+				float4 _Color5;
 				float3 _Center1;
 				float3 _Center2;
 				float3 _Center3;
@@ -86,24 +76,24 @@ Shader "Custom/Echolocation" {
 					float dist4 = distance(_Center4, i.worldPos);
 					float dist5 = distance(_Center5, i.worldPos);
 
-					float val1 = 1 - step(dist1, _Radius1 - 0.1) * 0.5 / _Color.a;
-					val1 = step(_Radius1 - 10, dist1) * step(dist1, _Radius1) * val1;
+					//float val1 = 1 - step(dist1, _Radius1 - 0.1) * 0.5 / _Color.a;
+					float val1 = step(_Radius1 - 10, dist1) * step(dist1, _Radius1) * _Color1.a;
 
-					float val2 = 1 - step(dist2, _Radius2 - 0.1) * 0.5 / _Color.a;					
-					val2 = step(_Radius2 - 10, dist2) * step(dist2, _Radius2) * val2;
+					//float val2 = 1 - step(dist2, _Radius2 - 0.1) * 0.5 / _Color.a;					
+					float val2 = step(_Radius2 - 10, dist2) * step(dist2, _Radius2) * _Color2.a;
 
-					float val3 = 1 - step(dist3, _Radius3 - 0.1) * 0.5 / _Color.a;
-					val3 = step(_Radius3 - 10, dist3) * step(dist3, _Radius3) * val3;
+					//float val3 = 1 - step(dist3, _Radius3 - 0.1) * 0.5 / _Color.a;
+					float val3 = step(_Radius3 - 10, dist3) * step(dist3, _Radius3) * _Color3.a;
 
-					float val4 = 1 - step(dist4, _Radius4 - 0.1) * 0.5 / _Color.a;
-					val4 = step(_Radius4 - 10, dist4) * step(dist4, _Radius4) * val4;
+					//float val4 = 1 - step(dist4, _Radius4 - 0.1) * 0.5 / _Color.a;
+					float val4 = step(_Radius4 - 10, dist4) * step(dist4, _Radius4) * _Color4.a;
 
-					float val5 = 1 - step(dist5, _Radius5 - 0.1) * 0.5 / _Color.a;
-					val5 = step(_Radius5 - 10, dist5) * step(dist5, _Radius5) * val5;
+					//float val5 = 1 - step(dist5, _Radius5 - 0.1) * 0.5 / _Color.a;
+					float val5 = step(_Radius5 - 10, dist5) * step(dist5, _Radius5) * _Color5.a; // * val5
 					
 					float val = val1 + val2 + val3 + val4 + val5;
 
-					return fixed4(val * _Color.r, val * _Color.g,val * _Color.b, 1.0);
+					return fixed4(val * _ColorBase.r, val * _ColorBase.g,val * _ColorBase.b, 1.0);
 				}
 
 				ENDCG

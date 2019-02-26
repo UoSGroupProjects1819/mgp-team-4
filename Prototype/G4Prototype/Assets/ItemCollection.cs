@@ -92,4 +92,9 @@ public class ItemCollection : MonoBehaviour
             inRangeOfPodium = false;
         }
     }
+
+    public void itemSelection()
+    {
+
+    }
 }
