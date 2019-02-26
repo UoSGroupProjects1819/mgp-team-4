@@ -16,10 +16,14 @@ public class ThrowBall : MonoBehaviour {
 
     private bool hasBall;
 
+    private shaderHandler shaderHandleScript;
+
     void Start () {
         initialPos = ballObject.transform.localPosition;
         initialRot = ballObject.transform.localRotation;
         ballCollider = ballObject.GetComponent<SphereCollider>();
+
+        shaderHandleScript = ballObject.GetComponent<shaderHandler>();
     }
 	
 	void OnMouseDown () {
@@ -68,5 +72,8 @@ public class ThrowBall : MonoBehaviour {
         ballRB2.useGravity = false;
         ballRB2.velocity = Vector3.zero;
         ballRB2.angularVelocity = Vector3.zero;
+
+        shaderHandleScript.canRipple = true;
+        shaderHandleScript.count = 0;
     }
 }
