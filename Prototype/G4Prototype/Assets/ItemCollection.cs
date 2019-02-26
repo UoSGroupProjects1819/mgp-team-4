@@ -8,6 +8,8 @@ public class ItemCollection : MonoBehaviour
     private bool inRangeOfItem;
     private GameObject itemInRange;
 
+    private itemHandler currentItemHandleScript;
+
     private bool inRangeOfPodium;
     ItemDeposit depositPodScript;
 
@@ -20,10 +22,20 @@ public class ItemCollection : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {     
+
         if (inRangeOfItem && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Pickup Item");
+           
+
+            currentItemHandleScript.itemSelection();
+
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+
+            }
+
             inventory.Add(itemInRange.name);
 
             inRangeOfItem = false;            
@@ -66,6 +78,7 @@ public class ItemCollection : MonoBehaviour
             Debug.Log("Item is: " + other.gameObject.name);
             inRangeOfItem = true;
             itemInRange = other.gameObject;
+            currentItemHandleScript = itemInRange.GetComponent<itemHandler>();
         }
 
         if (other.gameObject.CompareTag("Deposit"))
@@ -83,6 +96,7 @@ public class ItemCollection : MonoBehaviour
             Debug.Log("Left Item Space");
             inRangeOfItem = false;
             itemInRange = null;
+            currentItemHandleScript = null;
         }
 
         if (other.gameObject.CompareTag("Deposit"))
@@ -91,10 +105,5 @@ public class ItemCollection : MonoBehaviour
             depositPodScript = null;
             inRangeOfPodium = false;
         }
-    }
-
-    public void itemSelection()
-    {
-
     }
 }

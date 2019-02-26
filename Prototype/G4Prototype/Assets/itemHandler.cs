@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class itemHandler : MonoBehaviour
 {
@@ -10,15 +11,36 @@ public class itemHandler : MonoBehaviour
     public string[] potentialItems = new string[3];
     private string actualItem;
 
-    public Material test;
-    private MeshRenderer objectMat;
+    private ParticleSystem particleSys;
+
+    public GameObject selectionCanvas;
+    public GameObject leftTextObj;
+    public GameObject centerTextObj;
+    public GameObject rightTextObj;
+
+    private Text leftText;
+    private Text centerText;
+    private Text rightText;
 
     // Start is called before the first frame update
     void Start()
     {
         ballObject = GameObject.Find("Ball");
-        objectMat = gameObject.GetComponent<MeshRenderer>();
         actualItem = gameObject.name;
+
+        particleSys = gameObject.GetComponent<ParticleSystem>();
+        particleSys.Stop();
+
+        //selectionCanvas = GameObject.Find("canvasSelection");
+        //leftTextObj = selectionCanvas.transform.GetChild(0).gameObject;
+        //centerTextObj = selectionCanvas.transform.GetChild(1).gameObject;
+        //rightTextObj = selectionCanvas.transform.GetChild(2).gameObject;
+
+        leftText = leftTextObj.GetComponent<Text>();
+        centerText = centerTextObj.GetComponent<Text>();
+        rightText = rightTextObj.GetComponent<Text>();
+
+        selectionCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -26,7 +48,17 @@ public class itemHandler : MonoBehaviour
     {
         if(Vector3.Distance(ballObject.transform.position, gameObject.transform.position) < checkRadius)
         {
-            objectMat.material = test;
+            particleSys.Play();
         }   
+    }
+
+    public void itemSelection()
+    {
+        print("ye");
+        leftText.text = potentialItems[0];
+        centerText.text = potentialItems[1];
+        rightText.text = potentialItems[2];
+
+        selectionCanvas.SetActive(true);
     }
 }
