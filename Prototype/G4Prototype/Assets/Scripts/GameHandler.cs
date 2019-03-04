@@ -16,6 +16,9 @@ public class GameHandler : MonoBehaviour
 
     public gameStates gameState;
 
+    public int buttonSelected;
+    public bool buttonClickedOn = false;
+
     private void Awake()
     {
         if (_Instance != null && _Instance != this)
@@ -28,5 +31,11 @@ public class GameHandler : MonoBehaviour
         }
 
         gameState = gameStates.navigating;
+    }
+
+    public void buttonClicked(int buttonIdentfier)
+    {
+        buttonSelected = buttonIdentfier;
+        buttonClickedOn = true;
     }
 }

@@ -40,7 +40,13 @@ public class PlayerMovement : MonoBehaviour
                 Application.Quit();
             }
             
-        }        
+        }
+        
+        if(GameHandler.Instance.gameState == GameHandler.gameStates.selection)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

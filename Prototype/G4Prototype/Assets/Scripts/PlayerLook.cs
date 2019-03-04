@@ -25,8 +25,10 @@ public class PlayerLook : MonoBehaviour
 
     void RotateCamera()
     {
-        if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
+        if (GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+
             float MouseX = Input.GetAxis("Mouse X");
             float MouseY = Input.GetAxis("Mouse Y");
 

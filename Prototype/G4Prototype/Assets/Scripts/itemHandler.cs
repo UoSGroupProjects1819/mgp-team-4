@@ -67,11 +67,11 @@ public class itemHandler : MonoBehaviour
         selectionCanvas.SetActive(true);
     }
 
-    public void itemSelected()
+    public void itemSelected(int buttonIdentifer)
     {
+        print(potentialItems[buttonIdentifer]);
         GameHandler.Instance.gameState = GameHandler.gameStates.navigating;
         selectionCanvas.SetActive(false);
-
         //handle the selected option and points or whatever it is
     }
 }

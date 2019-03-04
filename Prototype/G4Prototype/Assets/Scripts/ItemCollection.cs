@@ -82,9 +82,10 @@ public class ItemCollection : MonoBehaviour
                 print("drop the bass");
             }
 
-            if (Input.GetKeyDown(KeyCode.O))
+            if (GameHandler.Instance.buttonClickedOn == true)
             {
-                currentItemHandleScript.itemSelected();
+                currentItemHandleScript.itemSelected(GameHandler.Instance.buttonSelected);
+                GameHandler.Instance.buttonClickedOn = false;
             } 
         }
         
