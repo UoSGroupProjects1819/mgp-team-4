@@ -110,7 +110,7 @@ public class shaderHandler : MonoBehaviour
 
         while (alphas[ripple] > 0.0f)
         {
-            alphas[ripple] -= 0.01f;
+            alphas[ripple] -= 0.05f;
             yield return new WaitForSeconds(.1f);
         }
     }

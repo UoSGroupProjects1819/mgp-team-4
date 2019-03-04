@@ -32,6 +32,11 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the controller
         controller.Move(moveDirection * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
