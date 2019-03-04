@@ -1755,7 +1755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &561293796
 Transform:
   m_ObjectHideFlags: 0
@@ -3851,6 +3851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Constraints
       value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 54164674803036534, guid: 6ea2c44b12dae834cbc8f8e40fa7246f,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 23110570422504930, guid: 6ea2c44b12dae834cbc8f8e40fa7246f,
         type: 3}

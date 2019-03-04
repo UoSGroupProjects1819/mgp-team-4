@@ -20,23 +20,29 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float horiMovement = Input.GetAxis("Horizontal");
-        float vertMovement = Input.GetAxis("Vertical");
-
-        moveDirection = new Vector3(horiMovement, 0.0f, vertMovement);
-        moveDirection = transform.TransformDirection(moveDirection);
-        moveDirection = moveDirection * speed;
-
-        // Apply gravity
-        moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
-
-        // Move the controller
-        controller.Move(moveDirection * Time.deltaTime);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
-            Application.Quit();
+            float horiMovement = Input.GetAxis("Horizontal");
+            float vertMovement = Input.GetAxis("Vertical");
+
+            moveDirection = new Vector3(horiMovement, 0.0f, vertMovement);
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection = moveDirection * speed;
+
+            // Apply gravity
+            moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
+
+            // Move the controller
+            controller.Move(moveDirection * Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
+            if (Input.GetKeyDown(KeyCode.P)) { GameHandler.Instance.gameState = GameHandler.gameStates.selection; }
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)

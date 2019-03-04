@@ -47,18 +47,22 @@ public class ThrowBall : MonoBehaviour {
             print(initialPos);
         }
 
-        if (Input.GetMouseButtonDown(0) && hasBall)
-        {
-            ballObject.transform.parent = null;
-            Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
-            ballRB.useGravity = true;
-            ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
-        }
 
-        if (Input.GetMouseButtonDown(1))
+        if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
-            resetBall(ballObject);
-        }
+            if (Input.GetMouseButtonDown(0) && hasBall)
+            {
+                ballObject.transform.parent = null;
+                Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
+                ballRB.useGravity = true;
+                ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
+            }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                resetBall(ballObject);
+            }
+        }       
 
         Debug.DrawRay(ballObject.transform.position, ballObject.transform.forward * force, Color.red);
     }

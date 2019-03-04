@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private static GameHandler _Instance;
+
+    public static GameHandler Instance { get { return _Instance; } }
+
+    public enum gameStates
     {
-        
+        navigating,
+        selection
     }
 
-    // Update is called once per frame
-    void Update()
+    public gameStates gameState;
+
+    private void Awake()
     {
-        
+        if (_Instance != null && _Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _Instance = this;
+        }
+
+        gameState = gameStates.navigating;
     }
 }
