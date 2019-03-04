@@ -18,6 +18,9 @@ public class itemHandler : MonoBehaviour
     public GameObject centerTextObj;
     public GameObject rightTextObj;
 
+    public AudioSource shakeSound;
+    public AudioSource dropSound;
+
     private Text leftText;
     private Text centerText;
     private Text rightText;
@@ -54,11 +57,21 @@ public class itemHandler : MonoBehaviour
 
     public void itemSelection()
     {
+        GameHandler.Instance.gameState = GameHandler.gameStates.selection;
+
         print("ye");
         leftText.text = potentialItems[0];
         centerText.text = potentialItems[1];
         rightText.text = potentialItems[2];
 
         selectionCanvas.SetActive(true);
+    }
+
+    public void itemSelected()
+    {
+        GameHandler.Instance.gameState = GameHandler.gameStates.navigating;
+        selectionCanvas.SetActive(false);
+
+        //handle the selected option and points or whatever it is
     }
 }

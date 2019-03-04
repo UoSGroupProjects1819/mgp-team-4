@@ -39,10 +39,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 Application.Quit();
             }
-
-            if (Input.GetKeyDown(KeyCode.P)) { GameHandler.Instance.gameState = GameHandler.gameStates.selection; }
-        }
-        
+            
+        }        
     }
 
     private void OnCollisionEnter(Collision collision)

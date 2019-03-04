@@ -23,51 +23,71 @@ public class ItemCollection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-
-        if (inRangeOfItem && Input.GetKeyDown(KeyCode.E))
+        if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
-            Debug.Log("Pickup Item");
-           
-
-            currentItemHandleScript.itemSelection();
-
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (inRangeOfItem && Input.GetKeyDown(KeyCode.E))
             {
+                Debug.Log("Pickup Item");
 
-            }
 
-            inventory.Add(itemInRange.name);
+                currentItemHandleScript.itemSelection();
 
-            inRangeOfItem = false;            
-            Destroy(itemInRange);
-            itemInRange = null;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Debug.Log(inventory);
-        }
-
-        if(inRangeOfPodium && Input.GetKeyDown(KeyCode.E))
-        {
-            bool hadItem = false;
-
-            foreach (var item in inventory)
-            {
-                if (item == depositPodScript.compareToStore)
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
-                    hadItem = true;
-                    inventory.Remove(item);
-                    Debug.Log("Placed item on podium");
-                    break;
-                }                
-            }
-            if(hadItem == false)
-            {
-                Debug.Log("You don't have the item");
+
+                }
+
+                inventory.Add(itemInRange.name);
+
+                inRangeOfItem = false;
+                Destroy(itemInRange);
+                itemInRange = null;
             }
 
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                Debug.Log(inventory);
+            }
+
+            if (inRangeOfPodium && Input.GetKeyDown(KeyCode.E))
+            {
+                bool hadItem = false;
+
+                foreach (var item in inventory)
+                {
+                    if (item == depositPodScript.compareToStore)
+                    {
+                        hadItem = true;
+                        inventory.Remove(item);
+                        Debug.Log("Placed item on podium");
+                        break;
+                    }
+                }
+                if (hadItem == false)
+                {
+                    Debug.Log("You don't have the item");
+                }
+
+            }
         }
+
+        if(GameHandler.Instance.gameState == GameHandler.gameStates.selection)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                print("Shake like an earthquake");
+            }
+            else if (Input.GetMouseButton(1))
+            {
+                print("drop the bass");
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                currentItemHandleScript.itemSelected();
+            } 
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
