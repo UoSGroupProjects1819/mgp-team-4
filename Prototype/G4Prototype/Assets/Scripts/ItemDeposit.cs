@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class ItemDeposit : MonoBehaviour
 {
-    public string compareToStore;
+    public GameObject itemToDeposit;
 
+    public string compareToStore { get; set; }
 
     void Start()
     {
-        
+        compareToStore = itemToDeposit.name;
     }
 
     // Update is called once per frame

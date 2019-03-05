@@ -15,9 +15,11 @@ public class ItemCollection : MonoBehaviour
 
     public List<string> inventory;
 
+    public Canvas playerCanvas;
+
     void Start()
     {
-        
+        playerCanvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,15 +71,24 @@ public class ItemCollection : MonoBehaviour
                 }
 
             }
+
+            if(inRangeOfItem || inRangeOfPodium)
+            {
+                playerCanvas.gameObject.SetActive(true);
+            }
+            else
+            {
+                playerCanvas.gameObject.SetActive(false);
+            }
         }
 
         if(GameHandler.Instance.gameState == GameHandler.gameStates.selection)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 print("Shake like an earthquake");
             }
-            else if (Input.GetMouseButton(1))
+            else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 print("drop the bass");
             }
