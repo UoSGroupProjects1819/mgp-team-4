@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemCollection : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class ItemCollection : MonoBehaviour
     public List<string> inventory;
 
     public Canvas playerCanvas;
+    public GameObject eventTextObj;
 
     void Start()
     {
@@ -62,6 +64,7 @@ public class ItemCollection : MonoBehaviour
                         hadItem = true;
                         inventory.Remove(item);
                         Debug.Log("Placed item on podium");
+                        eventTextObj.GetComponent<Text>().text = "Level complete";
                         break;
                     }
                 }
@@ -78,19 +81,24 @@ public class ItemCollection : MonoBehaviour
             }
             else
             {
+                eventTextObj.GetComponent<Text>().text =  " ";
                 playerCanvas.gameObject.SetActive(false);
             }
         }
 
         if(GameHandler.Instance.gameState == GameHandler.gameStates.selection)
         {
+            playerCanvas.gameObject.SetActive(true);
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 print("Shake like an earthquake");
+                eventTextObj.GetComponent<Text>().text = "Shaking Object...";
             }
             else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 print("drop the bass");
+                eventTextObj.GetComponent<Text>().text = "Dropped Object...";
             }
 
             if (GameHandler.Instance.buttonClickedOn == true)
