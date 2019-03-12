@@ -73,7 +73,7 @@ public class ThrowBall : MonoBehaviour {
         Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
         ballRB.useGravity = true;
         ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
-        Invoke("DelayCollide", 0.1f);
+        Invoke("DelayCollide", 0.05f);
     }
 
     public void resetBall(GameObject ball)
