@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,15 @@ public class ThrowBall : MonoBehaviour {
     private Vector3 initialPos;
     private Quaternion initialRot;
 
-    public Quaternion rot;
+    //public Quaternion rot;
 
     private bool hasBall;
 
     private shaderHandler shaderHandleScript;
+
+    public GameObject player;
+
+    private bool isCoroutineExecuting = false;
 
     void Start () {
         initialPos = ballObject.transform.localPosition;
@@ -39,7 +44,6 @@ public class ThrowBall : MonoBehaviour {
         else
         {
             hasBall = false;
-            ballCollider.enabled = true;
         }
 
         if (Input.GetButtonDown("Jump"))
@@ -47,15 +51,11 @@ public class ThrowBall : MonoBehaviour {
             print(initialPos);
         }
 
-
-        if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
+        if (GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
             if (Input.GetMouseButtonDown(0) && hasBall)
             {
-                ballObject.transform.parent = null;
-                Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
-                ballRB.useGravity = true;
-                ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
+                throwBall();
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -65,6 +65,15 @@ public class ThrowBall : MonoBehaviour {
         }       
 
         Debug.DrawRay(ballObject.transform.position, ballObject.transform.forward * force, Color.red);
+    }
+
+    public void throwBall()
+    {        
+        ballObject.transform.parent = null;
+        Rigidbody ballRB = ballObject.GetComponent<Rigidbody>();
+        ballRB.useGravity = true;
+        ballRB.AddForce(ballObject.transform.forward * force, ForceMode.Impulse);
+        Invoke("DelayCollide", 0.1f);
     }
 
     public void resetBall(GameObject ball)
@@ -79,5 +88,10 @@ public class ThrowBall : MonoBehaviour {
 
         shaderHandleScript.canRipple = true;
         shaderHandleScript.count = 0;
+    }
+
+    void DelayCollide()
+    {
+        ballCollider.enabled = true;
     }
 }
