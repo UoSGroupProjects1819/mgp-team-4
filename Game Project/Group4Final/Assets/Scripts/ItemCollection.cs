@@ -20,8 +20,11 @@ public class ItemCollection : MonoBehaviour
     private GameObject helpText;
     public GameObject eventTextObj;
 
+    public GameObject dialogText;
+
     void Start()
     {
+        dialogText = GameObject.Find("DialogText");
         playerCanvas.gameObject.SetActive(false);
         helpText = playerCanvas.gameObject.transform.GetChild(0).gameObject;
     }
@@ -29,6 +32,12 @@ public class ItemCollection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
+
+        if(dialogText.GetComponent<Text>().color.a >= 0.95f)
+        {
+            StartCoroutine(handleText(true));
+        }
+
         if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
             helpText.GetComponent<Text>().text = "Press E to interact";
@@ -42,7 +51,7 @@ public class ItemCollection : MonoBehaviour
                 inventory.Add(itemInRange.name);
 
                 inRangeOfItem = false;
-                itemInRange = null;
+                itemInRange = null;                
             }
 
             if (Input.GetKeyDown(KeyCode.Tab))
@@ -107,6 +116,7 @@ public class ItemCollection : MonoBehaviour
                 currentItemHandleScript.itemSelected(GameHandler.Instance.buttonSelected);
                 //eventTextObj.GetComponent<Text>().text = "Level complete";
                 GameHandler.Instance.buttonClickedOn = false;
+                StartCoroutine(handleText(false));
             } 
         }
         
@@ -147,5 +157,28 @@ public class ItemCollection : MonoBehaviour
             depositPodScript = null;
             inRangeOfPodium = false;
         }
+    }
+
+    IEnumerator handleText(bool fadeAway)
+    {
+        Text textComp = dialogText.GetComponent<Text>();
+
+        if (fadeAway)
+        {
+            for(float i = 1; i >= 0; i -= Time.deltaTime)
+            {
+                textComp.color = new Color(1, 1, 1, i);
+                yield return new WaitForSeconds(0.05f);
+            }
+        }
+        else
+        {
+            for (float i = 0; i <= 1; i += Time.deltaTime)
+            {
+                textComp.color = new Color(1, 1, 1, i);
+                yield return null;
+            }
+        }
+        
     }
 }
