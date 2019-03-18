@@ -7,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShaderMat
-  m_Shader: {fileID: 4800000, guid: 79cd777edcf9d8345a91f7127358fdce, type: 3}
+  m_Name: ParicleMat
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -19,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -40,8 +44,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 10, y: 10}
+        m_Texture: {fileID: 2800000, guid: a7615de2ade2b1241b7b12bdd5082be6, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -56,45 +60,45 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
+    - _BlendOp: 0
     - _BumpScale: 1
+    - _CameraFadingEnabled: 0
+    - _CameraFarFadeDistance: 2
+    - _CameraNearFadeDistance: 1
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DistortionBlend: 0.5
+    - _DistortionEnabled: 0
+    - _DistortionStrength: 1
+    - _DistortionStrengthScaled: 0
     - _DstBlend: 0
+    - _EmissionEnabled: 0
+    - _EnableExternalAlpha: 0
+    - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaxTriSize: 25
+    - _InvFade: 1
+    - _LightingEnabled: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Radius: 1.1668379
-    - _Radius1: 9.056751
-    - _Radius2: 9.026912
-    - _Radius3: 9.025945
-    - _Radius4: 9.031371
-    - _Radius5: 9.000645
     - _SmoothnessTextureChannel: 0
+    - _SoftParticlesEnabled: 0
+    - _SoftParticlesFarFadeDistance: 1
+    - _SoftParticlesNearFadeDistance: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WireSmoothness: 3
-    - _WireThickness: 130
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
-    - _Center: {r: -5.7053757, g: -0.7718159, b: 17.605686, a: 0}
-    - _Center1: {r: 73.57185, g: 3.403478, b: -6.897107, a: 0}
-    - _Center2: {r: 77.807495, g: 0.2000595, b: -1.6758783, a: 0}
-    - _Center3: {r: 71.06271, g: 1.1812277, b: -4.3341074, a: 0}
-    - _Center4: {r: 68.99386, g: 2.7384613, b: -1.5004921, a: 0}
-    - _Center5: {r: 69.296005, g: 2.9194403, b: -1.0406785, a: 0}
-    - _Color: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: 1}
-    - _Color1: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: -0.00000015646219}
-    - _Color2: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: -0.00000015646219}
-    - _Color3: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: -0.00000015646219}
-    - _Color4: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: -0.00000015646219}
-    - _Color5: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: -0.00000015646219}
-    - _ColorBase: {r: 0.31229973, g: 0.5471698, b: 0.5409343, a: 0.78431374}
+    - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireColor: {r: 0, g: 1, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}

@@ -17,11 +17,13 @@ public class ItemCollection : MonoBehaviour
     public List<string> inventory;
 
     public Canvas playerCanvas;
+    private GameObject helpText;
     public GameObject eventTextObj;
 
     void Start()
     {
         playerCanvas.gameObject.SetActive(false);
+        helpText = playerCanvas.gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -29,6 +31,8 @@ public class ItemCollection : MonoBehaviour
     {     
         if(GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
+            helpText.GetComponent<Text>().text = "Press E to interact";
+
             if (inRangeOfItem && Input.GetKeyDown(KeyCode.E))
             {
                 Debug.Log("Pickup Item");
@@ -81,6 +85,8 @@ public class ItemCollection : MonoBehaviour
 
         if(GameHandler.Instance.gameState == GameHandler.gameStates.selection)
         {
+            helpText.GetComponent<Text>().text = "Left Click here to Shake the item or Right Click to drop and select the correct item";
+
             playerCanvas.gameObject.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
