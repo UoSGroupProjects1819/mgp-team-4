@@ -10,6 +10,9 @@ public class shaderHandler : MonoBehaviour
     [HideInInspector]
     public bool canRipple;
 
+    public AudioClip bounceSound;
+    private AudioSource source;
+
     public float rippleSpeed;
     public float fadeDuration;
     float[] radius = { 0, 0, 0, 0, 0 };
@@ -23,6 +26,9 @@ public class shaderHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        source = gameObject.GetComponent<AudioSource>();
+        source.clip = bounceSound;
+
         shaderColor = shaderMat.GetColor("_ColorBase");
 
         canRipple = true;
@@ -58,6 +64,8 @@ public class shaderHandler : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Vector3 ballPos = transform.position;
+
+        source.Play();
 
         if (canRipple)
         {

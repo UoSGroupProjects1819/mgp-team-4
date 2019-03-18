@@ -94,19 +94,18 @@ public class ItemCollection : MonoBehaviour
                 //Shaking Object;
                 currentItemHandleScript.audioSource.clip = currentItemHandleScript.shakeSounds[Random.Range(0, currentItemHandleScript.shakeSounds.Length)];
                 currentItemHandleScript.audioSource.Play();
-                eventTextObj.GetComponent<Text>().text = "Shaking Object...";
             }
             else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 //Dropping Object;
                 currentItemHandleScript.audioSource.clip = currentItemHandleScript.dropSounds[Random.Range(0, currentItemHandleScript.dropSounds.Length)];
                 currentItemHandleScript.audioSource.Play();
-                eventTextObj.GetComponent<Text>().text = "Dropped Object...";
             }
 
             if (GameHandler.Instance.buttonClickedOn == true)
             {
                 currentItemHandleScript.itemSelected(GameHandler.Instance.buttonSelected);
+                //eventTextObj.GetComponent<Text>().text = "Level complete";
                 GameHandler.Instance.buttonClickedOn = false;
             } 
         }
