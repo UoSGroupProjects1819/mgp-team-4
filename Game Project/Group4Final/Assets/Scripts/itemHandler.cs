@@ -18,8 +18,11 @@ public class itemHandler : MonoBehaviour
     public GameObject centerTextObj;
     public GameObject rightTextObj;
 
-    public AudioSource shakeSound;
-    public AudioSource dropSound;
+    public AudioClip[] shakeSounds = new AudioClip[2];
+    public AudioClip[] dropSounds = new AudioClip[2];
+
+    [HideInInspector]
+    public AudioSource audioSource;
 
     private Text leftText;
     private Text centerText;
@@ -28,6 +31,8 @@ public class itemHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+
         ballObject = GameObject.Find("Ball");
         actualItem = gameObject.name;
 
@@ -72,6 +77,7 @@ public class itemHandler : MonoBehaviour
         print(potentialItems[buttonIdentifer]);
         GameHandler.Instance.gameState = GameHandler.gameStates.navigating;
         selectionCanvas.SetActive(false);
+        Destroy(gameObject);
         //handle the selected option and points or whatever it is
     }
 }

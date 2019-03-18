@@ -21,8 +21,6 @@ public class ThrowBall : MonoBehaviour {
 
     public GameObject player;
 
-    private bool isCoroutineExecuting = false;
-
     void Start () {
         initialPos = ballObject.transform.localPosition;
         initialRot = ballObject.transform.localRotation;

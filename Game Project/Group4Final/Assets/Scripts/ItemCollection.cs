@@ -33,18 +33,11 @@ public class ItemCollection : MonoBehaviour
             {
                 Debug.Log("Pickup Item");
 
-
                 currentItemHandleScript.itemSelection();
-
-                if (Input.GetKeyDown(KeyCode.Alpha1))
-                {
-
-                }
 
                 inventory.Add(itemInRange.name);
 
                 inRangeOfItem = false;
-                Destroy(itemInRange);
                 itemInRange = null;
             }
 
@@ -92,12 +85,16 @@ public class ItemCollection : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                print("Shake like an earthquake");
+                //Shaking Object;
+                currentItemHandleScript.audioSource.clip = currentItemHandleScript.shakeSounds[Random.Range(0, currentItemHandleScript.shakeSounds.Length)];
+                currentItemHandleScript.audioSource.Play();
                 eventTextObj.GetComponent<Text>().text = "Shaking Object...";
             }
             else if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                print("drop the bass");
+                //Dropping Object;
+                currentItemHandleScript.audioSource.clip = currentItemHandleScript.dropSounds[Random.Range(0, currentItemHandleScript.dropSounds.Length)];
+                currentItemHandleScript.audioSource.Play();
                 eventTextObj.GetComponent<Text>().text = "Dropped Object...";
             }
 
