@@ -70,7 +70,7 @@ public class ItemCollection : MonoBehaviour
                         hadItem = true;
                         inventory.Remove(item);
                         Debug.Log("Placed item on podium");
-                        eventTextObj.GetComponent<Text>().text = "Level complete";
+                        eventTextObj.GetComponent<Text>().text = "Memory complete";
                         break;
                     }
                 }
