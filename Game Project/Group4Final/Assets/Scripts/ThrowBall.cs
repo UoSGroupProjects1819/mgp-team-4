@@ -37,7 +37,7 @@ public class ThrowBall : MonoBehaviour {
         if(gameObject.transform.childCount != 0)
         {
             hasBall = true;
-            ballCollider.enabled = false;
+            ballObject.layer = 9;
         }
         else
         {
@@ -46,7 +46,7 @@ public class ThrowBall : MonoBehaviour {
 
         if (Input.GetButtonDown("Jump"))
         {
-            print(initialPos);
+            print(GameHandler.Instance.currentLevel);
         }
 
         if (GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
@@ -90,6 +90,6 @@ public class ThrowBall : MonoBehaviour {
 
     void DelayCollide()
     {
-        ballCollider.enabled = true;
+        ballObject.layer = 8;
     }
 }

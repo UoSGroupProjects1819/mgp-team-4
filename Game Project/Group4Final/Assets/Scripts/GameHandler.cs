@@ -8,6 +8,8 @@ public class GameHandler : MonoBehaviour
 
     public static GameHandler Instance { get { return _Instance; } }
 
+    public GameObject playerGameObject;
+
     public enum gameStates
     {
         navigating,
@@ -15,6 +17,20 @@ public class GameHandler : MonoBehaviour
     }
 
     public gameStates gameState;
+
+    public enum levels
+    {
+        LEVEL_1,
+        LEVEL_2,
+        LEVEL_3,
+        LEVEL_4,
+        LEVEL_5,
+        MAX_LEVEL
+    }
+
+    public levels currentLevel;
+
+    public List<GameObject> levelSpawners;
 
     public int buttonSelected;
     public bool buttonClickedOn = false;
@@ -31,11 +47,22 @@ public class GameHandler : MonoBehaviour
         }
 
         gameState = gameStates.navigating;
+        currentLevel = levels.LEVEL_1;
     }
 
     public void buttonClicked(int buttonIdentfier)
     {
         buttonSelected = buttonIdentfier;
         buttonClickedOn = true;
+    }
+
+    public void nextLevel()
+    {
+        if(currentLevel + 1 != levels.MAX_LEVEL)
+        {
+            currentLevel = currentLevel + 1;
+        }
+
+        playerGameObject.transform.position = levelSpawners[(int)currentLevel].transform.position;
     }
 }

@@ -71,6 +71,7 @@ public class ItemCollection : MonoBehaviour
                         inventory.Remove(item);
                         Debug.Log("Placed item on podium");
                         eventTextObj.GetComponent<Text>().text = "Memory complete";
+                        GameHandler.Instance.nextLevel();
                         break;
                     }
                 }
