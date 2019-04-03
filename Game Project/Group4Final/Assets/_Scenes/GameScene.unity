@@ -2126,13 +2126,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
+      propertyPath: dropSounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
+        type: 3}
       propertyPath: potentialItems.Array.data[0]
       value: Pocketwatch
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: potentialItems.Array.data[2]
-      value: Clock
+      value: Bracelet
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
@@ -2159,6 +2164,21 @@ PrefabInstance:
       propertyPath: rightTextObj
       value: 
       objectReference: {fileID: 373306476}
+    - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
+        type: 3}
+      propertyPath: shakeSounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 44a92b37fcb99ce4881405383c6e074d, type: 3}
+    - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
+        type: 3}
+      propertyPath: shakeSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2938f1909d2ef5a4ba8188257147c55e, type: 3}
+    - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
+        type: 3}
+      propertyPath: dropSounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: af705935d14aab14b8171cfe6e907ff9, type: 3}
     - target: {fileID: 5707044411776584523, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
