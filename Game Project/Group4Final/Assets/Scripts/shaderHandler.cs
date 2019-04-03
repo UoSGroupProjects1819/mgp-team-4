@@ -114,11 +114,11 @@ public class shaderHandler : MonoBehaviour
     IEnumerator fade(int ripple)
     {
 
-        alphas[ripple] = 1.0f;
+        alphas[ripple] = 0.5f;
 
         while (alphas[ripple] > 0.0f)
         {
-            alphas[ripple] -= 0.05f;
+            alphas[ripple] -= 0.03f;
             yield return new WaitForSeconds(.1f);
         }
     }
