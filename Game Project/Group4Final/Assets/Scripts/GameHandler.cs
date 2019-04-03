@@ -22,8 +22,8 @@ public class GameHandler : MonoBehaviour
     {
         LEVEL_1,
         LEVEL_2,
-        MAX_LEVEL,
         LEVEL_3,
+        MAX_LEVEL,        
         LEVEL_4,
         LEVEL_5        
     }
