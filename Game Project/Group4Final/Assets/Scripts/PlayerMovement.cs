@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameHandler.Instance.gameState == GameHandler.gameStates.navigating)
         {
+            Cursor.visible = false;
+
             float horiMovement = Input.GetAxis("Horizontal");
             float vertMovement = Input.GetAxis("Vertical");
 

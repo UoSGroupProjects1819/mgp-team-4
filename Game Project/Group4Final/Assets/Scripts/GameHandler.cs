@@ -22,10 +22,10 @@ public class GameHandler : MonoBehaviour
     {
         LEVEL_1,
         LEVEL_2,
+        MAX_LEVEL,
         LEVEL_3,
         LEVEL_4,
-        LEVEL_5,
-        MAX_LEVEL
+        LEVEL_5        
     }
 
     public levels currentLevel;
@@ -64,5 +64,6 @@ public class GameHandler : MonoBehaviour
         }
 
         playerGameObject.transform.position = levelSpawners[(int)currentLevel].transform.position;
+        playerGameObject.transform.rotation = levelSpawners[(int)currentLevel].transform.rotation;
     }
 }
