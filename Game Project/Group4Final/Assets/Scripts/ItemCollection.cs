@@ -33,6 +33,11 @@ public class ItemCollection : MonoBehaviour
     void Update()
     {     
 
+        if((int)GameHandler.Instance.currentLevel == 1)
+        {
+            dialogText.GetComponent<Text>().text = ("Eww its dirty... Best go to sink to wash it off");
+        }
+
         if(dialogText.GetComponent<Text>().color.a >= 0.95f)
         {
             StartCoroutine(handleText(true));
@@ -70,7 +75,7 @@ public class ItemCollection : MonoBehaviour
                         hadItem = true;
                         inventory.Remove(item);
                         Debug.Log("Placed item on podium");
-                        eventTextObj.GetComponent<Text>().text = "Memory complete";
+                        //eventTextObj.GetComponent<Text>().text = "Memory complete";
                         GameHandler.Instance.nextLevel();
                         break;
                     }
