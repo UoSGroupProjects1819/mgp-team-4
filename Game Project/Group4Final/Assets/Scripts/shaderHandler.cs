@@ -6,6 +6,7 @@ public class shaderHandler : MonoBehaviour
 {
 
     public Material shaderMat;
+    public List<Material> shaderMatList;
     public float rippleRadius;
     [HideInInspector]
     public bool canRipple;
@@ -29,36 +30,42 @@ public class shaderHandler : MonoBehaviour
         source = gameObject.GetComponent<AudioSource>();
         source.clip = bounceSound;
 
-        shaderColor = shaderMat.GetColor("_ColorBase");
-
-        canRipple = true;
-
-        for (int i = 0; i < radius.Length; i++)
+        for (int i = 0; i < shaderMatList.Count; i++)
         {
-            shaderMat.SetVector("_Center" + (i + 1).ToString(), new Vector3(0, -1000, 0));
-        }
-        shaderMat.SetColor("_Color", new Color(shaderColor.r, shaderColor.g, shaderColor.b, 1.0f));
 
+            shaderColor = shaderMatList[i].GetColor("_ColorBase");
+
+            canRipple = true;
+
+            for (int j = 0; j < radius.Length; j++)
+            {
+                shaderMatList[i].SetVector("_Center" + (j + 1).ToString(), new Vector3(0, -1000, 0));
+            }
+            shaderMatList[i].SetColor("_Color", new Color(shaderColor.r, shaderColor.g, shaderColor.b, 1.0f));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < radius.Length; i++)
+        for (int x = 0; x < shaderMatList.Count; x++)
         {
-            if (radius[i] <= rippleRadius)
+            for (int i = 0; i < radius.Length; i++)
             {
-                radius[i] += Time.deltaTime * rippleSpeed;
+                if (radius[i] <= rippleRadius)
+                {
+                    radius[i] += Time.deltaTime * rippleSpeed;
 
-                shaderMat.SetFloat("_Radius" + (i + 1).ToString(), radius[i]);
+                    shaderMatList[x].SetFloat("_Radius" + (i + 1).ToString(), radius[i]);
 
+                }
+            }
+
+            for (int j = 0; j < alphas.Length; j++)
+            {
+                shaderMatList[x].SetColor("_Color" + (j + 1).ToString(), new Color(shaderColor.r, shaderColor.g, shaderColor.b, alphas[j]));
             }
         }
-
-        for (int j = 0; j < alphas.Length; j++)
-        {
-            shaderMat.SetColor("_Color" + (j + 1).ToString(), new Color(shaderColor.r,shaderColor.g,shaderColor.b, alphas[j]));
-        }         
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,46 +74,49 @@ public class shaderHandler : MonoBehaviour
 
         source.Play();
 
-        if (canRipple)
+        for (int i = 0; i < shaderMatList.Count; i++)
         {
-            switch (currentRipple)
+            if (canRipple)
             {
-                case 0:
-                    shaderMat.SetVector("_Center1", ballPos);
-                    StartCoroutine("fade",0);
-                    break;
-                case 1:
-                    shaderMat.SetVector("_Center2", ballPos);
-                    StartCoroutine("fade",1);
-                    break;
-                case 2:
-                    shaderMat.SetVector("_Center3", ballPos);
-                    StartCoroutine("fade",2);
-                    break;
-                case 3:
-                    shaderMat.SetVector("_Center4", ballPos);
-                    StartCoroutine("fade",3);
-                    break;
-                case 4:
-                    shaderMat.SetVector("_Center5", ballPos);
-                    StartCoroutine("fade",4);
-                    break;
+                switch (currentRipple)
+                {
+                    case 0:
+                        shaderMatList[i].SetVector("_Center1", ballPos);
+                        StartCoroutine("fade", 0);
+                        break;
+                    case 1:
+                        shaderMatList[i].SetVector("_Center2", ballPos);
+                        StartCoroutine("fade", 1);
+                        break;
+                    case 2:
+                        shaderMatList[i].SetVector("_Center3", ballPos);
+                        StartCoroutine("fade", 2);
+                        break;
+                    case 3:
+                        shaderMatList[i].SetVector("_Center4", ballPos);
+                        StartCoroutine("fade", 3);
+                        break;
+                    case 4:
+                        shaderMatList[i].SetVector("_Center5", ballPos);
+                        StartCoroutine("fade", 4);
+                        break;
 
-                default:
-                    break;
-            }
+                    default:
+                        break;
+                }
 
-            radius[currentRipple] = 0;
+                radius[currentRipple] = 0;
 
-            currentRipple++;
-            count++;
-            if (count >= radius.Length)
-            {
-                canRipple = false;
-            }
-            if (currentRipple >= radius.Length)
-            {
-                currentRipple = 0;
+                currentRipple++;
+                count++;
+                if (count >= radius.Length)
+                {
+                    canRipple = false;
+                }
+                if (currentRipple >= radius.Length)
+                {
+                    currentRipple = 0;
+                }
             }
         }
     }
