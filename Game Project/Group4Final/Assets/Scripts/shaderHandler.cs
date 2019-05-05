@@ -25,6 +25,8 @@ public class shaderHandler : MonoBehaviour
     [HideInInspector]
     public int count;
 
+    int currentShader;
+
     Color shaderColor;
     // Start is called before the first frame update
     void Start()
@@ -45,26 +47,28 @@ public class shaderHandler : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        
         for (int i = 0; i < radius.Length; i++)
         {
-            for (int x = 0; x < shaderMatList.Count; x++)
+            if (radius[i] <= rippleRadius)
             {
-                if (radius[i] <= rippleRadius)
+                radius[i] += Time.deltaTime * rippleSpeed;
+
+                for (int x = 0; x < shaderMatList.Count; x++)
                 {
-                    radius[i] += Time.deltaTime * rippleSpeed;
-
                     shaderMatList[x].SetFloat("_Radius" + (i + 1).ToString(), radius[i]);
+                }
 
 
-
-                    for (int j = 0; j < alphas.Length; j++)
+                for (int j = 0; j < alphas.Length; j++)
+                {
+                    for (int x = 0; x < shaderMatList.Count; x++)
                     {
                         shaderMatList[x].SetColor("_Color" + (j + 1).ToString(), new Color(shaderColor.r, shaderColor.g, shaderColor.b, alphas[j]));
                     }
                 }
             }
-        }
+        }        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -75,48 +79,62 @@ public class shaderHandler : MonoBehaviour
         
         if (canRipple)
         {
-            for (int i = 0; i < shaderMatList.Count; i++)
+            switch (currentRipple)
             {
-                switch (currentRipple)
-                {
-                    case 0:
+                case 0:
+                    for (int i = 0; i < shaderMatList.Count; i++)
+                    {
                         shaderMatList[i].SetVector("_Center1", ballPos);
+                    }
                         StartCoroutine("fade", 0);
-                        break;
-                    case 1:
+                    break;
+                case 1:
+                    for (int i = 0; i < shaderMatList.Count; i++)
+                    {
                         shaderMatList[i].SetVector("_Center2", ballPos);
+                    }
                         StartCoroutine("fade", 1);
-                        break;
-                    case 2:
+                 
+                    break;
+                case 2:
+                    for (int i = 0; i < shaderMatList.Count; i++)
+                    {
                         shaderMatList[i].SetVector("_Center3", ballPos);
+                    }
                         StartCoroutine("fade", 2);
-                        break;
-                    case 3:
+                    break;
+                case 3:
+                    for (int i = 0; i < shaderMatList.Count; i++)
+                    {
                         shaderMatList[i].SetVector("_Center4", ballPos);
-                        StartCoroutine("fade", 3);
-                        break;
-                    case 4:
+                    }
+                    StartCoroutine("fade", 3);
+                    break;
+                case 4:
+                    for (int i = 0; i < shaderMatList.Count; i++)
+                    {
                         shaderMatList[i].SetVector("_Center5", ballPos);
-                        StartCoroutine("fade", 4);
-                        break;
+                    }
+                    StartCoroutine("fade", 4);
+                    break;
 
-                    default:
-                        break;
-                }
-
-                radius[currentRipple] = 0;
-
-                currentRipple++;
-                count++;
-                if (count >= radius.Length)
-                {
-                    canRipple = false;
-                }
-                if (currentRipple >= radius.Length)
-                {
-                    currentRipple = 0;
-                }
+                default:
+                    break;
             }
+
+            radius[currentRipple] = 0;
+
+            currentRipple++;
+            count++;
+            if (count >= radius.Length)
+            {
+                canRipple = false;
+            }
+            if (currentRipple >= radius.Length)
+            {
+                currentRipple = 0;
+            }
+                
         }
     }
 
