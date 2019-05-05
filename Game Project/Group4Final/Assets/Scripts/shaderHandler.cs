@@ -6,7 +6,15 @@ public class shaderHandler : MonoBehaviour
 {
 
     public Material shaderMat;
+
     public List<Material> shaderMatList;
+    public List<Material> Level1ShaderMats;
+    public List<Material> Level2ShaderMats;
+    public List<Material> Level3ShaderMats;
+    public List<Material> Level4ShaderMats;
+    public List<Material> Level5ShaderMats;
+    public List<Material> Level6ShaderMats;
+
     public float rippleRadius;
     [HideInInspector]
     public bool canRipple;
@@ -73,10 +81,10 @@ public class shaderHandler : MonoBehaviour
         Vector3 ballPos = transform.position;
 
         source.Play();
-
-        for (int i = 0; i < shaderMatList.Count; i++)
+        
+        if (canRipple)
         {
-            if (canRipple)
+            for (int i = 0; i < shaderMatList.Count; i++)
             {
                 switch (currentRipple)
                 {
@@ -118,7 +126,7 @@ public class shaderHandler : MonoBehaviour
                     currentRipple = 0;
                 }
             }
-        }
+        }   
     }
 
     IEnumerator fade(int ripple)

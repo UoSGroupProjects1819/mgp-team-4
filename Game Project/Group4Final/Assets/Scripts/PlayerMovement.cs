@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         throwBallScript = Camera.GetComponent<ThrowBall>();
+
+        Cursor.visible = false;
     }
 
     void Update()
