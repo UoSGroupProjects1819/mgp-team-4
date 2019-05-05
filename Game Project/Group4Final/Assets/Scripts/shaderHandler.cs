@@ -40,7 +40,10 @@ public class shaderHandler : MonoBehaviour
 
             for (int j = 0; j < radius.Length; j++)
             {
-                shaderMat.SetVector("_Center" + (j + 1).ToString(), new Vector3(0, -1000, 0));
+                for (int x = 0; x < shaderMatList.Count; x++)
+                {
+                shaderMatList[x].SetVector("_Center" + (j + 1).ToString(), new Vector3(0, -1000, 0));
+                }
             }
             shaderMat.SetColor("_Color", new Color(shaderColor.r, shaderColor.g, shaderColor.b, 1.0f));
     }
