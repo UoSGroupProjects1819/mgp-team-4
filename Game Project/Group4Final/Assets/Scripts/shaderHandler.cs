@@ -8,12 +8,6 @@ public class shaderHandler : MonoBehaviour
     public Material shaderMat;
 
     public List<Material> shaderMatList;
-    public List<Material> Level1ShaderMats;
-    public List<Material> Level2ShaderMats;
-    public List<Material> Level3ShaderMats;
-    public List<Material> Level4ShaderMats;
-    public List<Material> Level5ShaderMats;
-    public List<Material> Level6ShaderMats;
 
     public float rippleRadius;
     [HideInInspector]
@@ -38,27 +32,23 @@ public class shaderHandler : MonoBehaviour
         source = gameObject.GetComponent<AudioSource>();
         source.clip = bounceSound;
 
-        for (int i = 0; i < shaderMatList.Count; i++)
-        {
-
-            shaderColor = shaderMatList[i].GetColor("_ColorBase");
+            shaderColor = shaderMat.GetColor("_ColorBase");
 
             canRipple = true;
 
             for (int j = 0; j < radius.Length; j++)
             {
-                shaderMatList[i].SetVector("_Center" + (j + 1).ToString(), new Vector3(0, -1000, 0));
+                shaderMat.SetVector("_Center" + (j + 1).ToString(), new Vector3(0, -1000, 0));
             }
-            shaderMatList[i].SetColor("_Color", new Color(shaderColor.r, shaderColor.g, shaderColor.b, 1.0f));
-        }
+            shaderMat.SetColor("_Color", new Color(shaderColor.r, shaderColor.g, shaderColor.b, 1.0f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int x = 0; x < shaderMatList.Count; x++)
+        for (int i = 0; i < radius.Length; i++)
         {
-            for (int i = 0; i < radius.Length; i++)
+            for (int x = 0; x < shaderMatList.Count; x++)
             {
                 if (radius[i] <= rippleRadius)
                 {
@@ -66,12 +56,13 @@ public class shaderHandler : MonoBehaviour
 
                     shaderMatList[x].SetFloat("_Radius" + (i + 1).ToString(), radius[i]);
 
-                }
-            }
 
-            for (int j = 0; j < alphas.Length; j++)
-            {
-                shaderMatList[x].SetColor("_Color" + (j + 1).ToString(), new Color(shaderColor.r, shaderColor.g, shaderColor.b, alphas[j]));
+
+                    for (int j = 0; j < alphas.Length; j++)
+                    {
+                        shaderMatList[x].SetColor("_Color" + (j + 1).ToString(), new Color(shaderColor.r, shaderColor.g, shaderColor.b, alphas[j]));
+                    }
+                }
             }
         }
     }
@@ -126,7 +117,7 @@ public class shaderHandler : MonoBehaviour
                     currentRipple = 0;
                 }
             }
-        }   
+        }
     }
 
     IEnumerator fade(int ripple)
