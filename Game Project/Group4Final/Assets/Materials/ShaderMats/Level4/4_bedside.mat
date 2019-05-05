@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 5_pencilholder
+  m_Name: 4_bedside
   m_Shader: {fileID: 4800000, guid: 79cd777edcf9d8345a91f7127358fdce, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4fa9ac4267dd99d42a9735d30d8cb4aa, type: 3}
+        m_Texture: {fileID: 2800000, guid: 322a95c6c91390142bf9687ac40bee18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -69,11 +69,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _Radius: 1.1668379
-    - _Radius1: 5.8066773
-    - _Radius2: 5.8066773
-    - _Radius3: 5.8066773
-    - _Radius4: 5.8066773
-    - _Radius5: 5.8066773
+    - _Radius1: 7.1381745
+    - _Radius2: 7.1381745
+    - _Radius3: 7.1381745
+    - _Radius4: 7.1381745
+    - _Radius5: 7.1381745
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -84,11 +84,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
     - _Center: {r: -5.7053757, g: -0.7718159, b: 17.605686, a: 0}
-    - _Center1: {r: 163.8118, g: 6.4177055, b: -0.8562052, a: 0}
-    - _Center2: {r: 160.78687, g: 5.0193563, b: 4.0577793, a: 0}
-    - _Center3: {r: 160.85109, g: 5.771819, b: 4.057772, a: 0}
-    - _Center4: {r: 159.85188, g: 5.8445635, b: 3.9102964, a: 0}
-    - _Center5: {r: 159.90848, g: 4.1048527, b: 9.363471, a: 0}
+    - _Center1: {r: 159.90848, g: 4.1048527, b: 9.363471, a: 0}
+    - _Center2: {r: 163.8118, g: 6.4177055, b: -0.8562052, a: 0}
+    - _Center3: {r: 160.78687, g: 5.0193563, b: 4.0577793, a: 0}
+    - _Center4: {r: 160.85109, g: 5.771819, b: 4.057772, a: 0}
+    - _Center5: {r: 159.85188, g: 5.8445635, b: 3.9102964, a: 0}
     - _Color: {r: 0.6226415, g: 0.48531199, b: 0.29076183, a: 1}
     - _Color1: {r: 0.6226415, g: 0.48531199, b: 0.29076183, a: 0.47}
     - _Color2: {r: 0.6226415, g: 0.48531199, b: 0.29076183, a: 0.47}
