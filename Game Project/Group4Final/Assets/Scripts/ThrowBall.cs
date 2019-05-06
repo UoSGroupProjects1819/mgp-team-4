@@ -44,6 +44,11 @@ public class ThrowBall : MonoBehaviour {
             hasBall = false;
         }
 
+        if(Vector3.Distance(ballObject.transform.position, gameObject.transform.position) > 40.0f)
+        {
+            resetBall(ballObject);
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             print(GameHandler.Instance.currentLevel);

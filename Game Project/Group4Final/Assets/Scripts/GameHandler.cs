@@ -10,6 +10,12 @@ public class GameHandler : MonoBehaviour
 
     public GameObject playerGameObject;
 
+    public AudioSource audioSource;
+    public List<AudioClip> entryDialogs;
+    private int dialogIterator;
+
+    public List<AudioClip> ambientSounds;
+
     public enum gameStates
     {
         navigating,
@@ -37,6 +43,8 @@ public class GameHandler : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
+        dialogIterator = 0;
         if (_Instance != null && _Instance != this)
         {
             Destroy(this.gameObject);
@@ -48,6 +56,8 @@ public class GameHandler : MonoBehaviour
 
         gameState = gameStates.navigating;
         currentLevel = levels.LEVEL_1;
+        audioSource.clip = entryDialogs[dialogIterator];
+        audioSource.Play();
     }
 
     public void buttonClicked(int buttonIdentfier)
@@ -62,8 +72,11 @@ public class GameHandler : MonoBehaviour
         {
             currentLevel = currentLevel + 1;
         }
+        dialogIterator++;
 
         playerGameObject.transform.position = levelSpawners[(int)currentLevel].transform.position;
         playerGameObject.transform.rotation = levelSpawners[(int)currentLevel].transform.rotation;
+        audioSource.clip = entryDialogs[dialogIterator];
+        audioSource.Play();
     }
 }

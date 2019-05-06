@@ -23,6 +23,7 @@ public class itemHandler : MonoBehaviour
 
     [HideInInspector]
     public AudioSource audioSource;
+    public List<AudioClip> dialog;
 
     private Text leftText;
     private Text centerText;
@@ -77,7 +78,9 @@ public class itemHandler : MonoBehaviour
         print(potentialItems[buttonIdentifer]);
         GameHandler.Instance.gameState = GameHandler.gameStates.navigating;
         selectionCanvas.SetActive(false);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        audioSource.clip = dialog[buttonIdentifer];
+        audioSource.Play();
         //handle the selected option and points or whatever it is
     }
 }
