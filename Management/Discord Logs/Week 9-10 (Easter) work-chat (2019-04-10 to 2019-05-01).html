@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Group 4 - work-chat</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <style>
+        /* === GENERAL === */
+
+body {
+    font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    object-fit: contain;
+}
+
+.markdown {
+    white-space: pre-wrap;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.spoiler {
+    border-radius: 3px;
+}
+
+.pre {
+    font-family: "Consolas", "Courier New", Courier, Monospace;
+}
+
+.pre--multiline {
+    margin-top: 4px;
+    padding: 8px;
+    border: 2px solid;
+    border-radius: 5px;    
+}
+
+.pre--inline {
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.mention {
+    font-weight: 500;
+}
+
+.emoji {
+    width: 1.45em;
+    height: 1.45em;
+    margin: 0 1px;
+    vertical-align: -0.4em;
+}
+
+.emoji--small {
+    width: 1rem;
+    height: 1rem;
+}
+
+.emoji--large {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* === INFO === */
+
+.info {
+    display: flex;
+    max-width: 100%;
+    margin: 0 5px 10px 5px;    
+}
+
+.info__guild-icon-container {
+    flex: 0;
+}
+
+.info__guild-icon {
+    max-width: 88px;
+    max-height: 88px;
+}
+
+.info__metadata {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.info__guild-name {
+    font-size: 1.4em;
+}
+
+.info__channel-name {
+    font-size: 1.2em;
+}
+
+.info__channel-topic {
+    margin-top: 2px;
+}
+
+.info__channel-message-count {
+    margin-top: 2px;
+}
+
+.info__channel-date-range {
+    margin-top: 2px;
+}
+
+/* === CHATLOG === */
+
+.chatlog {
+    max-width: 100%;
+    margin-bottom: 24px;
+}
+
+.chatlog__message-group {
+    display: flex;
+    margin: 0 10px;
+    padding: 15px 0;
+    border-top: 1px solid;
+}
+
+.chatlog__author-avatar-container {
+    flex: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.chatlog__author-avatar {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+.chatlog__messages {
+    flex: 1;
+    min-width: 50%;
+    margin-left: 20px;
+}
+
+.chatlog__author-name {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.chatlog__timestamp {
+    margin-left: 5px;
+    font-size: .75em;
+}
+
+.chatlog__content {
+    padding-top: 5px;
+    font-size: .9375em;
+    word-wrap: break-word;
+}
+
+.chatlog__edited-timestamp {
+    margin-left: 3px;
+    font-size: .8em;
+}
+
+.chatlog__attachment {
+    margin: 5px 0;
+}
+
+.chatlog__attachment-thumbnail {
+    max-width: 50%;
+    max-height: 500px;
+    border-radius: 3px;
+}
+
+.chatlog__embed {
+    display: flex;
+    max-width: 520px;
+    margin-top: 5px;
+}
+
+.chatlog__embed-color-pill {
+    flex-shrink: 0;
+    width: 4px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.chatlog__embed-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.chatlog__embed-content {
+    width: 100%;
+    display: flex;
+}
+
+.chatlog__embed-text {
+    flex: 1;
+}
+
+.chatlog__embed-author {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.chatlog__embed-author-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 9px;
+    border-radius: 50%;
+}
+
+.chatlog__embed-author-name {
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-title {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-description {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.chatlog__embed-fields {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.chatlog__embed-field {
+    flex: 0;
+    min-width: 100%;
+    max-width: 506px;
+    padding-top: 10px;
+}
+
+.chatlog__embed-field--inline {
+    flex: 1;
+    flex-basis: auto;
+    min-width: 150px;
+}
+
+.chatlog__embed-field-name {
+    margin-bottom: 4px;
+    font-size: .875em;
+    font-weight: 600;
+}
+
+.chatlog__embed-field-value {
+    font-size: .875em;
+    font-weight: 500;
+}
+
+.chatlog__embed-thumbnail {
+    flex: 0;
+    margin-left: 20px;
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-image-container {
+    margin-top: 10px;
+}
+
+.chatlog__embed-image {    
+    max-width: 500px;
+    max-height: 400px;
+    border-radius: 3px;
+}
+
+.chatlog__embed-footer {
+    margin-top: 10px;
+}
+
+.chatlog__embed-footer-icon {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.chatlog__embed-footer-text {
+    font-weight: 600;
+    font-size: .75em;
+}
+
+.chatlog__reactions {
+    display: flex;
+}
+
+.chatlog__reaction {
+    display: flex;
+    align-items: center;
+    margin: 6px 2px 2px 2px;
+    padding: 3px 6px;
+    border-radius: 3px;
+}
+
+.chatlog__reaction-count {
+    min-width: 9px;
+    margin-left: 6px;
+    font-size: .875em;
+}
+    </style>
+    <style>
+        /* === GENERAL === */
+
+body {
+    background-color: #36393e;
+    color: #dcddde;
+}
+
+a {
+    color: #0096cf;
+}
+
+.spoiler {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.pre {
+    background-color: #2f3136 !important;
+}
+
+.pre--multiline {
+    border-color: #282b30 !important;
+    color: #839496 !important;
+}
+
+.mention {
+    color: #7289da;
+}
+
+/* === INFO === */
+
+.info__guild-name {
+    color: #ffffff;
+}
+
+.info__channel-name {
+    color: #ffffff;
+}
+
+.info__channel-topic {
+    color: #ffffff;
+}
+
+/* === CHATLOG === */
+
+.chatlog__message-group {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.chatlog__author-name {
+    color: #ffffff;
+}
+
+.chatlog__timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__edited-timestamp {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.chatlog__embed-content-container {
+    background-color: rgba(46, 48, 54, 0.3);
+    border-color: rgba(46, 48, 54, 0.6);
+}
+
+.chatlog__embed-author-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-author-name-link {
+    color: #ffffff;
+}
+
+.chatlog__embed-title {
+    color: #ffffff;
+}
+
+.chatlog__embed-description {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-field-name {
+    color: #ffffff;
+}
+
+.chatlog__embed-field-value {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__embed-footer {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chatlog__reaction {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.chatlog__reaction-count {
+    color: rgba(255, 255, 255, 0.3);
+}
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</head>
+<body>
+    
+<div class="info">
+    <div class="info__guild-icon-container">
+        <img class="info__guild-icon" src="https://cdn.discordapp.com/embed/avatars/0.png" />
+    </div>
+    <div class="info__metadata">
+        <div class="info__guild-name">Group 4</div>
+        <div class="info__channel-name">work-chat</div>
+        
+            <div class="info__channel-topic"></div>
+
+        <div class="info__channel-message-count">22 messages</div>
+        
+            <div class="info__channel-date-range">
+                    Between 10-Apr-19 12:00 AM and 01-May-19 12:00 AM
+            </div>
+    </div>
+</div>
+
+<div class="chatlog">
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">10-Apr-19 10:54 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hey <span class="mention">@everyone</span> if you could please check and verify that all work is logged as appropriate and in the correct place so that I can close the sprint that would be great thank you.
+
+Regarding work over easter I&#39;m toying up the idea of setting up a sprint with various tasks that we could all work on or we just play it by ear, I&#39;ll get in contact later today and discuss that with yous.
+
+I&#39;ll be honest with you, I&#39;m not sure if personally I&#39;m going to have much time over the easter to do work my end. I have <strong>a lot</strong> going on my end in the very limited time we&#39;ve got left for the year, lots of assignments. I&#39;d still love for the game to be the best it can be and I will try to put time into it where possible but I can&#39;t guarantee anything I&#39;m afraid</span>
+
+                                <span class="chatlog__edited-timestamp" title="10-Apr-19 10:56 AM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">10-Apr-19 11:42 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Same goes for me I want to work on it but as the deadlines for the assignments are coming I don&#39;t know how much time I will have. I would suggest set a sprint which is 3 weeks long with various tasks and we complete whatever we can <img class="emoji " alt="😃" title="😃" src="https://twemoji.maxcdn.com/2/72x72/1f603.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">10-Apr-19 08:24 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Alright brilliant, if you think it&#39;ll be helpful then I&#39;ll get one up and running soon as possible <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /> if both of you wouldn&#39;t mind taking some time to think of potential tasks that could be worked on that would be great help thank you</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">11-Apr-19 10:18 AM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">For my tasks:                                          
+- create top down view map jpeg for each level explaining exit points, items location etc.                                                                  - create art for the menu window                           -create exit points for the elevator on all levels                                                                        -texturing all levels (as long as the texture works so far if not we can put wireframe shaders on the last level and this will be it)</span>
+
+                                <span class="chatlog__edited-timestamp" title="11-Apr-19 01:10 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">11-Apr-19 01:11 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I am sure there is more tasks but that is all I can think of for now</span>
+
+                                <span class="chatlog__edited-timestamp" title="11-Apr-19 01:11 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">11-Apr-19 03:40 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That&#39;s awesome stuff much appreciated, I&#39;ll try and get the sprint up today if possible</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/200743884639305729/b7094fd9f6e45a273e3fb4e669ebb9d2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="banyard#8517">banyard</span>
+                <span class="chatlog__timestamp">11-Apr-19 03:57 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Of course I will need to get more play testing, butni need a finished first level to do that lol.
+I can do the audio for each room so we have all the files for them so they can be implemented whenever we fancy putting them in</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And I dunno anything else I can do :/</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">30-Apr-19 12:00 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">hey <span class="mention">@everyone</span></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Past Echoes (Group 4) utilised an interesting echolocation style mechanic that felt easily understandable even at a glance. The focus on discovering objects in a hidden world could easily be quite captivating. I’d be keen to see how clever audio design could smooth the experience out and guide the player instead of having them spread their effort into searching.</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">That is from Rob and Joe just saw the email</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">30-Apr-19 12:06 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Oh nice yeah just spotted that too, some pretty good feedback there more than happy with it <img class="emoji " alt="👌" title="👌" src="https://twemoji.maxcdn.com/2/72x72/1f44c.png" /> That last sentence is really interesting, the use of audio to help guide/direct the player in the right direction - sounds like something we could make use of if done right</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Apr-19 12:08 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">30-Apr-19 12:07 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">yea <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /></span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">by the way I did not see an active sprint during the holiday but i have done some stuff which should be uploaded in github they are just not logged in jira</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I created a guide top down image of each level explaining where goes what</span>
+
+                        </div>
+
+
+
+                        <div class="chatlog__content">
+                            <span class="markdown">And made a passage for the elevator in each level</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">30-Apr-19 12:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">My apologies for not having an official sprint up but awesome stuff with getting on with stuff - it was quite hard to think of exact things but you both had ideas on the sort of stuff to work on if wanted to so it was open to free interpretation really. Due to all the work I need to get done the Group Project stuff has kinda just been sitting in the back of my mind over the holidays, I am hopefully aiming to get some more stuff done on it tonight and get the game in a solid state before we meet up again tomorrow. I&#39;ve got a huge assignment in for the end of the week so that&#39;s a big priority but on Friday once it&#39;s handed in I should be able to input more time into this coming into the final weeks</span>
+
+                                <span class="chatlog__edited-timestamp" title="30-Apr-19 12:14 PM">(edited)</span>
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/316646158992670722/34757bff5d24aef2df6b0824836fdf5c.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="Arion#9245">Arion</span>
+                <span class="chatlog__timestamp">30-Apr-19 12:16 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Yes I understand, do not worry  about it I have been doing assignments as well so I had very little time for the textures and as we are still not sure how exactly they work in game I left them behind for now and did some other stuff instead <img class="emoji " alt="😄" title="😄" src="https://twemoji.maxcdn.com/2/72x72/1f604.png" /></span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/200743884639305729/b7094fd9f6e45a273e3fb4e669ebb9d2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="banyard#8517">banyard</span>
+                <span class="chatlog__timestamp">30-Apr-19 03:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I know that it is getting busy for everyone but Alex, could I get a file for level 1 that&#39;s finished so we can get feedback on that.</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">30-Apr-19 04:37 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">I know that you&#39;ve been promised that long ago and should have it by now and I apologise. I can&#39;t promise anything but I will do what I can to try and get that to you soon as by the end of the day. Please appreciate there&#39;s still some work that needs done on it so might take a bit and will work on it soon as I can</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/200743884639305729/b7094fd9f6e45a273e3fb4e669ebb9d2.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="banyard#8517">banyard</span>
+                <span class="chatlog__timestamp">30-Apr-19 04:48 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">All i ask is for it as soon as you can, as i know you are busy</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+        <div class="chatlog__message-group">
+            <div class="chatlog__author-avatar-container">
+                <img class="chatlog__author-avatar" src="https://cdn.discordapp.com/avatars/186268524967100417/c3eb017b648e2483a0f65373f3fbb950.png" />
+            </div>            
+            <div class="chatlog__messages">
+                <span class="chatlog__author-name" title="kaiguin#1433">kaiguin</span>
+                <span class="chatlog__timestamp">30-Apr-19 10:14 PM</span>
+
+                        <div class="chatlog__content">
+                            <span class="markdown">Hey guys just a couple things, finally got round to the textures for the level - it&#39;s looking all great so far and the lines really help define the room however for a reason I&#39;m not sure about - I&#39;m having to reimport the models and basically rebuild the level again otherwise the textures won&#39;t work correctly so that&#39;s taking a bit of unnecessary extra time. Then it&#39;s just a tiny tweak of the shader handler code and it should all work wonderful <img class="emoji " alt="🤞" title="🤞" src="https://twemoji.maxcdn.com/2/72x72/1f91e.png" /> 
+
+Just a note as well - we&#39;ll be coming up to what is the final week I believe for the last sprint, tomorrow (I hope you can both make it) we will really discuss and think about the scope for the rest of the game and be realistic about what needs to be/ can be in order to hit the deadline. But we&#39;ll go through it all tomorrow</span>
+
+                        </div>
+
+
+
+            </div>
+        </div>
+</div>
+
+</body>
+</html>
