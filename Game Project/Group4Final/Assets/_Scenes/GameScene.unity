@@ -12775,17 +12775,17 @@ PrefabInstance:
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: potentialItems.Array.data[0]
-      value: Stressball
+      value: Rope
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: potentialItems.Array.data[2]
-      value: Candy
+      value: Chain
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: potentialItems.Array.data[1]
-      value: Cushion
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
@@ -12831,12 +12831,12 @@ PrefabInstance:
         type: 3}
       propertyPath: dialog.Array.data[0]
       value: 
-      objectReference: {fileID: 8300000, guid: 0ded0d9c901908348abc8b3c37c02200, type: 3}
+      objectReference: {fileID: 8300000, guid: 23c717ced438cea429772c516c4c2e93, type: 3}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: dialog.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: a9c63c276f1085044b86b05e242c89d4, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 7046105287356319528, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: dropSounds.Array.data[1]
@@ -12896,7 +12896,7 @@ PrefabInstance:
         type: 3}
       propertyPath: dialog.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: 3bb36c46e5b1b4243890faed0a404df4, type: 3}
+      objectReference: {fileID: 8300000, guid: 978f174e8c92714428c4bf863fdc8866, type: 3}
     - target: {fileID: 5707044411776584523, guid: d1f1e930840343c4daf8cf3381717d45,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
