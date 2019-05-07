@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameHandler : MonoBehaviour
         LEVEL_3,              
         LEVEL_4,
         LEVEL_5,
+        LEVEL_6,
         MAX_LEVEL
     }
 
@@ -71,6 +73,10 @@ public class GameHandler : MonoBehaviour
         if(currentLevel + 1 != levels.MAX_LEVEL)
         {
             currentLevel = currentLevel + 1;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
         dialogIterator++;
 
