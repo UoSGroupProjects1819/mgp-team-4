@@ -29,9 +29,13 @@ public class itemHandler : MonoBehaviour
     private Text centerText;
     private Text rightText;
 
+    bool canPickup;
+
     // Start is called before the first frame update
     void Start()
     {
+        canPickup = true;
+
         audioSource = gameObject.GetComponent<AudioSource>();
 
         ballObject = GameObject.Find("Ball");
@@ -63,18 +67,22 @@ public class itemHandler : MonoBehaviour
 
     public void itemSelection()
     {
-        GameHandler.Instance.gameState = GameHandler.gameStates.selection;
+        if (canPickup)
+        {
+            GameHandler.Instance.gameState = GameHandler.gameStates.selection;
 
-        print("ye");
-        leftText.text = potentialItems[0];
-        centerText.text = potentialItems[1];
-        rightText.text = potentialItems[2];
+            print("ye");
+            leftText.text = potentialItems[0];
+            centerText.text = potentialItems[1];
+            rightText.text = potentialItems[2];
 
-        selectionCanvas.SetActive(true);
+            selectionCanvas.SetActive(true);
+        }
     }
 
     public void itemSelected(int buttonIdentifer)
     {
+        canPickup = false;
         print(potentialItems[buttonIdentifer]);
         GameHandler.Instance.gameState = GameHandler.gameStates.navigating;
         selectionCanvas.SetActive(false);

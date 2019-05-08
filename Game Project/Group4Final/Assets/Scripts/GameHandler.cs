@@ -17,6 +17,8 @@ public class GameHandler : MonoBehaviour
 
     public List<AudioClip> ambientSounds;
 
+    public ambientHandler ambientHandler;
+
     public enum gameStates
     {
         navigating,
@@ -60,6 +62,8 @@ public class GameHandler : MonoBehaviour
         currentLevel = levels.LEVEL_1;
         audioSource.clip = entryDialogs[dialogIterator];
         audioSource.Play();
+
+        ambientHandler.updateAmbient(currentLevel);
     }
 
     public void buttonClicked(int buttonIdentfier)
@@ -73,10 +77,11 @@ public class GameHandler : MonoBehaviour
         if(currentLevel + 1 != levels.MAX_LEVEL)
         {
             currentLevel = currentLevel + 1;
+            ambientHandler.updateAmbient(currentLevel);
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);            
         }
         dialogIterator++;
 
