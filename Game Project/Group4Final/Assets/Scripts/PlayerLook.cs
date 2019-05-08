@@ -6,6 +6,7 @@ public class PlayerLook : MonoBehaviour
 {
 
     public Transform playerBody;
+    public Camera main;
 
     [Range(0.5f, 10f)]
     public float mouseSensitivity;
@@ -15,6 +16,7 @@ public class PlayerLook : MonoBehaviour
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        //main.pixelRect = new Rect(0, 0, 800, 600);
     }
 
     void Update()
